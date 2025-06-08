@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  n8n:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - NODE_ENV=production
+      - GENERIC_TIMEZONE=Asia/Kolkata
+      - NODE_FUNCTION_ALLOW_BUILTIN=fs,crypto,os,path,url,https
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - WEBHOOK_URL=https://n8n3.jayautomations.xyz  # Replace with your domain
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+    restart: always
